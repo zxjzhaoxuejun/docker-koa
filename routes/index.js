@@ -1,9 +1,12 @@
+const { query } = require('../db/mysql')
+const ParamException = require('../exceptions/paramException')
+
 const router = require('koa-router')()
 
 router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
-  })
+  const sql = 'select * from kcb.tb_admin'
+  const res= await query(sql)
+  ctx.body=res
 })
 
 router.get('/string', async (ctx, next) => {
